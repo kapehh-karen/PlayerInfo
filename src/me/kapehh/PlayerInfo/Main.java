@@ -24,8 +24,12 @@ public class Main extends JavaPlugin implements CommandExecutor {
                     "\n" +
                     "=*======================\n";
 
-    private String processFormat(Player player) {
-        return format.replace("{name}", player.getName());
+    private String processFormat(Player player, PlayerStat playerStat) {
+        return format.replace("{name}", player.getName())
+                .replace("{hp}", String.valueOf(player.getHealth()))
+                .replace("{mobs}", String.valueOf(playerStat.getMobKills()))
+                .replace("{players}", String.valueOf(playerStat.getPlayerKills()))
+                .replace("{deaths}", String.valueOf(playerStat.getDeaths()));
     }
 
     @Override
@@ -40,7 +44,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        player.sendMessage(processFormat(player));
+        player.sendMessage(processFormat(player, new PlayerStat(player)));
         return true;
     }
 
