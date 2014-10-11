@@ -3,5 +3,3 @@ connect:
     db: localhost
     login: root
     password: password
-timer:
-    ticks: 1000
