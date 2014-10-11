@@ -94,11 +94,8 @@ public class Main extends JavaPlugin implements CommandExecutor {
 
     @Override
     public void onEnable() {
-        /*File pluginFolder = getDataFolder();
-        if (!pluginFolder.exists()) {
-            pluginFolder.mkdirs();
-        }
-        File fileFormat = new File(pluginFolder, "format.txt");*/
+        // TODO: ranklist загружаем инфу о ранках и показываем сколько осталось до следующего ранка
+
         instance = this;
 
         if (getServer().getPluginManager().getPlugin("PluginManager") == null) {
@@ -160,6 +157,12 @@ public class Main extends JavaPlugin implements CommandExecutor {
             return;
         }
 
-        // ...
+        if (dbHelper != null) {
+            try {
+                dbHelper.disconnect();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
