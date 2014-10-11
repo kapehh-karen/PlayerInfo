@@ -1,0 +1,9 @@
+name: PlayerInfo
+main: me.kapehh.PlayerInfo.Main
+author: kapehh
+version: 1.0.0
+commands:
+    playerinfo:
+        description: PlayerInfo
+        usage: /<command> toggle
+        aliases: 'i'
