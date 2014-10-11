@@ -3,3 +3,16 @@ connect:
     db: localhost
     login: root
     password: password
+message: |
+    =*======================
+    [{name}]
+    -
+    Звание: {rank}
+    Уровень: {lvl}
+    Здоровье: {hp}
+    -
+    Динарии: {money}
+    Убито мобов: {mobs}
+    Убито игроков: {players}
+    Смертей: {deaths}
+    =*======================

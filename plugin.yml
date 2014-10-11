@@ -5,5 +5,5 @@ version: 1.0.0
 commands:
     playerinfo:
         description: PlayerInfo
-        usage: /<command> toggle
+        usage: /<command> [reload - for console, playername - for players]
         aliases: 'i'

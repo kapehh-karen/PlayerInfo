@@ -27,7 +27,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
     private PluginConfig pluginConfig;
     private DBHelper dbHelper;
 
-    String format = "=*======================\n" +
+    String format/* = "=*======================\n" +
                     "[{name}]\n" +
                     "\n" +
                     "Звание: {rank}\n" +
@@ -40,7 +40,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
                     "Убито игроков: {players}\n" +
                     "Смертей: {deaths}\n" +
                     "\n" +
-                    "=*======================\n";
+                    "=*======================\n"*/;
 
     private String processFormat(Player player, PlayerStat playerStat) {
         return format.replace("{name}", player.getName())
@@ -86,6 +86,8 @@ public class Main extends JavaPlugin implements CommandExecutor {
             dbHelper = null;
             e.printStackTrace();
         }
+
+        format = cfg.getString("message");
 
         getLogger().info("Complete!");
     }
