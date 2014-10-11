@@ -45,7 +45,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
     private String processFormat(Player player, PlayerStat playerStat) {
         return format.replace("{name}", player.getName())
                 .replace("{lvl}", String.valueOf(playerStat.getLvl()))
-                .replace("{hp}", String.valueOf(playerStat.getHp()))
+                .replace("{hp}", String.valueOf(playerStat.getHp())) // TODO: выводить хп без .0
                 .replace("{money}", String.valueOf(playerStat.getMoney()))
                 .replace("{rank}", playerStat.getRank())
                 .replace("{mobs}", String.valueOf(playerStat.getMobKills()))
