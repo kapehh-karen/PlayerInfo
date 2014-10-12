@@ -16,12 +16,13 @@ import java.sql.SQLException;
  * Created by Karen on 11.10.2014.
  */
 public class PlayerStat {
-    private double hp = 0;
+    private int hp = 0;
     private int lvl = 0;
     private double money = 0;
     private int mobKills = 0;
     private int playerKills = 0;
     private int deaths = 0;
+    private int playtime = 0;
     private String rank;
 
     public PlayerStat(Player player) {
@@ -48,6 +49,7 @@ public class PlayerStat {
         mobKills = player.getStatistic(Statistic.MOB_KILLS);
         playerKills = player.getStatistic(Statistic.PLAYER_KILLS);
         deaths = player.getStatistic(Statistic.DEATHS);
+        playtime = player.getStatistic(Statistic.PLAY_ONE_TICK) / 20; // to seconds
     }
 
     public String getRank() {
@@ -62,7 +64,7 @@ public class PlayerStat {
         return money;
     }
 
-    public double getHp() {
+    public int getHp() {
         return hp;
     }
 
@@ -76,5 +78,9 @@ public class PlayerStat {
 
     public int getPlayerKills() {
         return playerKills;
+    }
+
+    public int getPlaytime() {
+        return playtime;
     }
 }

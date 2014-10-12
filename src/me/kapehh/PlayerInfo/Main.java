@@ -26,31 +26,27 @@ public class Main extends JavaPlugin implements CommandExecutor {
     private Economy economy;
     private PluginConfig pluginConfig;
     private DBHelper dbHelper;
-
-    String format/* = "=*======================\n" +
-                    "[{name}]\n" +
-                    "\n" +
-                    "Звание: {rank}\n" +
-                    "Уровень: {lvl}\n" +
-                    "Здоровье: {hp}\n" +
-                    "\n" +
-                    "Динарии: {money}\n" +
-                    "\n" +
-                    "Убито мобов: {mobs}\n" +
-                    "Убито игроков: {players}\n" +
-                    "Смертей: {deaths}\n" +
-                    "\n" +
-                    "=*======================\n"*/;
+    private RankList rankList;
+    private String format;
 
     private String processFormat(Player player, PlayerStat playerStat) {
-        return format.replace("{name}", player.getName())
-                .replace("{lvl}", String.valueOf(playerStat.getLvl()))
-                .replace("{hp}", String.valueOf(playerStat.getHp())) // TODO: выводить хп без .0
-                .replace("{money}", String.valueOf(playerStat.getMoney()))
-                .replace("{rank}", playerStat.getRank())
-                .replace("{mobs}", String.valueOf(playerStat.getMobKills()))
-                .replace("{players}", String.valueOf(playerStat.getPlayerKills()))
-                .replace("{deaths}", String.valueOf(playerStat.getDeaths()));
+        String res = format.replace("{name}", player.getName())
+            .replace("{lvl}", String.valueOf(playerStat.getLvl()))
+            .replace("{hp}", String.valueOf(playerStat.getHp()))
+            .replace("{money}", String.valueOf(playerStat.getMoney()))
+            .replace("{rank}", playerStat.getRank())
+            .replace("{mobs}", String.valueOf(playerStat.getMobKills()))
+            .replace("{players}", String.valueOf(playerStat.getPlayerKills()))
+            .replace("{deaths}", String.valueOf(playerStat.getDeaths()));
+
+        RankList.RankListItem item = rankList.getNextRankListItem(playerStat.getRank());
+        if (item == null) {
+            return res;
+        }
+
+        return res.replace("{nextrank}", item.getRankName())
+            .replace("{lastmobs}", String.valueOf(RankList.getLastMobs(playerStat, item)))
+            .replace("{lastplayers}", String.valueOf(RankList.getLastKills(playerStat, item)));
     }
 
     public Economy getEconomy() {
@@ -81,6 +77,7 @@ public class Main extends JavaPlugin implements CommandExecutor {
         );
         try {
             dbHelper.connect();
+            rankList = new RankList();
             getLogger().info("Success connect to MySQL!");
         } catch (SQLException e) {
             dbHelper = null;
@@ -94,8 +91,6 @@ public class Main extends JavaPlugin implements CommandExecutor {
 
     @Override
     public void onEnable() {
-        // TODO: ranklist загружаем инфу о ранках и показываем сколько осталось до следующего ранка
-
         instance = this;
 
         if (getServer().getPluginManager().getPlugin("PluginManager") == null) {
