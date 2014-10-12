@@ -22,7 +22,7 @@ message: |
     Убито игроков: {players}
     Смертей: {deaths}
     -
-    Следующий ранк {nextrank}, осталось {leftmobs} или {leftplayers} игроков.
+    Следующий ранк {nextrank}, осталось {leftmobs} мобов или {leftplayers} игроков.
     =*======================
 </pre>
 
