@@ -13,7 +13,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.sql.SQLException;
 
 /**
@@ -45,8 +44,8 @@ public class Main extends JavaPlugin implements CommandExecutor {
         }
 
         return res.replace("{nextrank}", item.getRankName())
-            .replace("{lastmobs}", String.valueOf(RankList.getLastMobs(playerStat, item)))
-            .replace("{lastplayers}", String.valueOf(RankList.getLastKills(playerStat, item)));
+            .replace("{leftmobs}", String.valueOf(RankList.getLeftMobs(playerStat, item)))
+            .replace("{leftplayers}", String.valueOf(RankList.getLeftKills(playerStat, item)));
     }
 
     public Economy getEconomy() {

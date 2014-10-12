@@ -96,19 +96,19 @@ public class RankList {
         return rankListItems.get(r);
     }
 
-    public static int getLastKills(PlayerStat playerStat, RankListItem item) {
-        int last = item.getKills() - playerStat.getPlayerKills();
-        return (last < 0) ? 0 : last;
+    public static int getLeftKills(PlayerStat playerStat, RankListItem item) {
+        int left = item.getKills() - playerStat.getPlayerKills();
+        return (left < 0) ? 0 : left;
     }
 
-    public static int getLastMobs(PlayerStat playerStat, RankListItem item) {
-        int last = item.getMobs() - playerStat.getMobKills();
-        return (last < 0) ? 0 : last;
+    public static int getLeftMobs(PlayerStat playerStat, RankListItem item) {
+        int left = item.getMobs() - playerStat.getMobKills();
+        return (left < 0) ? 0 : left;
     }
 
-    public static int getLastTime(PlayerStat playerStat, RankListItem item) {
-        int last = item.getPlaytime() - playerStat.getPlaytime();
-        return (last < 0) ? 0 : last;
+    public static int getLeftTime(PlayerStat playerStat, RankListItem item) {
+        int left = item.getPlaytime() - playerStat.getPlaytime();
+        return (left < 0) ? 0 : left;
     }
 
     @Override
