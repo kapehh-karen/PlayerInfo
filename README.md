@@ -21,6 +21,8 @@ message: |
     Убито мобов: {mobs}
     Убито игроков: {players}
     Смертей: {deaths}
+    -
+    Следующий ранк {nextrank}, осталось {leftmobs} или {leftplayers} игроков.
     =*======================
 </pre>
 
