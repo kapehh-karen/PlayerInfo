@@ -33,14 +33,14 @@ public class PlayerStat {
                 if (result.getResultSet().next()) {
                     rank = result.getResultSet().getString("prefix");
                 } else {
-                    rank = "Unknown";
+                    rank = "Unknown#1";
                 }
                 dbHelper.queryEnd(result);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
-            rank = "Unknown";
+            rank = "Unknown#2";
         }
 
         hp = (int) player.getHealth();

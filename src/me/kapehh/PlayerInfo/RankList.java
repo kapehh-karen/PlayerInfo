@@ -64,7 +64,7 @@ public class RankList {
             ResultSet result = helperResult.getResultSet();
             while (result.next()) {
                 RankListItem item = new RankListItem(
-                    result.getString("rankname"),
+                    result.getString("rankname").replace("_", " "),
                     result.getInt("kills"),
                     result.getInt("mobs"),
                     result.getInt("playtime")
