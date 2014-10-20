@@ -45,7 +45,8 @@ public class Main extends JavaPlugin implements CommandExecutor {
 
         return res.replace("{nextrank}", item.getRankName())
             .replace("{leftmobs}", String.valueOf(RankList.getLeftMobs(playerStat, item)))
-            .replace("{leftplayers}", String.valueOf(RankList.getLeftKills(playerStat, item)));
+            .replace("{leftplayers}", String.valueOf(RankList.getLeftKills(playerStat, item)))
+            .replace("{lefttime}", String.valueOf(RankList.getLeftTime(playerStat, item)));
     }
 
     public Economy getEconomy() {
