@@ -26,6 +26,7 @@ public class PlayerStat {
     private String rank;
 
     public PlayerStat(Player player) {
+        // TODO: Добавить оффлайн загрузку статистики игрока из файла (если он оффлайн)
         DBHelper dbHelper = Main.instance.getDbHelper();
         if (dbHelper != null) {
             try {
@@ -33,14 +34,14 @@ public class PlayerStat {
                 if (result.getResultSet().next()) {
                     rank = result.getResultSet().getString("prefix");
                 } else {
-                    rank = "Unknown#1";
+                    rank = "Recruit";
                 }
                 dbHelper.queryEnd(result);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
-            rank = "Unknown#2";
+            rank = "Unknown";
         }
 
         hp = (int) player.getHealth();
@@ -82,5 +83,36 @@ public class PlayerStat {
 
     public int getPlaytime() {
         return playtime;
+    }
+
+    // convert
+
+    private final static int ONE_SECOND = 1;
+    private final static int SECONDS_IN_A_MINUTE = 60;
+    private final static int ONE_MINUTE = ONE_SECOND * 60;
+    private final static int MINUTES_IN_AN_HOUR = 60;
+    private final static int ONE_HOUR = ONE_MINUTE * 60;
+    private final static int HOURS_IN_A_DAY = 24;
+    private final static int ONE_DAY = ONE_HOUR * 24;
+    private final static int DAYS_IN_A_YEAR = 365;
+
+    public static String formatHMSM(int duration) {
+        duration /= ONE_SECOND;
+        int seconds = duration % SECONDS_IN_A_MINUTE;
+        duration /= SECONDS_IN_A_MINUTE;
+        int minutes = (int) (duration % MINUTES_IN_AN_HOUR);
+        duration /= MINUTES_IN_AN_HOUR;
+        int hours = duration % HOURS_IN_A_DAY;
+        duration /= HOURS_IN_A_DAY;
+        int days = duration % DAYS_IN_A_YEAR;
+        duration /= DAYS_IN_A_YEAR;
+        int years = duration;
+        if (days == 0) {
+            return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        } else if (years == 0) {
+            return String.format("%d день %02d:%02d:%02d", days, hours, minutes, seconds);
+        } else {
+            return String.format("%d год %d день %02dh%02dm%02ds", years, days, hours, minutes, seconds);
+        }
     }
 }
