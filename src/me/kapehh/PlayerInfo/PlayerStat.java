@@ -26,7 +26,6 @@ public class PlayerStat {
     private String rank;
 
     public PlayerStat(Player player) {
-        // TODO: Добавить оффлайн загрузку статистики игрока из файла (если он оффлайн)
         DBHelper dbHelper = Main.instance.getDbHelper();
         if (dbHelper != null) {
             try {
